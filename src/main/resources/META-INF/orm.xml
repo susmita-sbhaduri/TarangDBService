@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+    <named-query name="Minutedata.listByScripid">
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid = :scripid</query>
+    </named-query> 
+    <named-query name="Minutedata.listByScripidLastupdate">
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid = :scripid and m.minutedataPK.lastupdateminute > :lastupdatedate</query>
+    </named-query>
+    <named-query name="Minutedata.validCallsForScript">
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend ORDER BY m.minutedataPK.lastupdateminute DESC</query>
+    </named-query>
+    <named-query name="Calltable.calllistSorted">
+        <query>SELECT c FROM Calltable c ORDER BY c.calltablePK.scripid, c.calltablePK.lastupdateminute</query>
+    </named-query>
+    <named-query name="Calltable.callPerScripid">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.scripid = :scripid</query>
+    </named-query>
+    <named-query name="Calltable.getReverseCalls">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.scripid = :scripid AND c.calltablePK.lastupdateminute &lt; :lastupddate AND c.calltwo = :calltwo ORDER BY c.calltablePK.lastupdateminute DESC</query>
+    </named-query>   
+    <named-query name="Scrips.listAllScripid">
+        <query>SELECT s FROM Scrips s</query>
+    </named-query>
+</entity-mappings>

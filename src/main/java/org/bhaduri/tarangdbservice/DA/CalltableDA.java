@@ -6,11 +6,12 @@ package org.bhaduri.tarangdbservice.DA;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
-import org.bhaduri.minutedataaccess.JPA.CalltableJpaController;
-import org.bhaduri.minutedataaccess.entities.Calltable;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+import org.bhaduri.tarangdbservice.JPA.CalltableJpaController;
+import org.bhaduri.tarangdbservice.entities.Calltable;
+
 
 /**
  *

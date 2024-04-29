@@ -5,11 +5,12 @@
 package org.bhaduri.tarangdbservice.DA;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
-import org.bhaduri.minutedataaccess.JPA.ScripsJpaController;
-import org.bhaduri.minutedataaccess.entities.Scrips;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+import org.bhaduri.tarangdbservice.JPA.ScripsJpaController;
+import org.bhaduri.tarangdbservice.entities.Scrips;
+
 
 /**
  *

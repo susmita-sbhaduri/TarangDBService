@@ -7,8 +7,8 @@ package org.bhaduri.tarangdbservice;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
-import org.bhaduri.tarangdbservice.JPA.ScripsJpaController;
-import org.bhaduri.tarangdbservice.entities.Scrips;
+import org.bhaduri.tarangdbservice.DA.MinutedataDA;
+import org.bhaduri.tarangdbservice.entities.Minutedata;
 
 /**
  *
@@ -19,11 +19,9 @@ public class TarangDBService {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.bhaduri_TarangDBService_jar_1.0-SNAPSHOTPU");
-        ScripsJpaController scripsJpaController = new ScripsJpaController(emf);
-        List<Scrips> list =  scripsJpaController.findScripsEntities();
-        for (int i = 0; i < list.size();i++) {
-            System.out.println(list.get(i).getScripid());
-        }
+        MinutedataDA minutedataDA = new MinutedataDA(emf);
+        List<Minutedata> minutedatas  = minutedataDA.listByScripid("ADANIENT");
+        minutedatas.forEach(m-> System.out.println(Double.toString(m.getDaylastprice())));
         
     }
 }

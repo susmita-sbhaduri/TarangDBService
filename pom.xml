@@ -22,9 +22,11 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>TarangDTO</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
