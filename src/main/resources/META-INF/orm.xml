@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
     <named-query name="Minutedata.listByScripid">
-        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid = :scripid</query>
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid = :scripid  ORDER BY m.minutedataPK.lastupdateminute</query>
     </named-query> 
     <named-query name="Minutedata.listByScripidLastupdate">
         <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid = :scripid and m.minutedataPK.lastupdateminute > :lastupdatedate</query>
