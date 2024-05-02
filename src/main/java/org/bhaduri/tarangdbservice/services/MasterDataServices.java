@@ -7,10 +7,12 @@ package org.bhaduri.tarangdbservice.services;
 import java.util.List;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.bhaduri.tarangdbservice.DA.MinutedataDA;
 import org.bhaduri.tarangdbservice.entities.Minutedata;
+import org.bhaduri.tarangdto.CallResultsIntermediate;
 import org.bhaduri.tarangdto.LastTransactionPrice;
 
 /**
@@ -25,7 +27,7 @@ public class MasterDataServices {
         emf = Persistence.createEntityManagerFactory("org.bhaduri_TarangDBService_jar_1.0-SNAPSHOTPU");
     }
 
-    public List<LastTransactionPrice> getLastTransactionPriceList(String scripid) {
+    public CallResultsIntermediate getLastTransactionPriceList(String scripid) {
         MinutedataDA minutedataDA = new MinutedataDA(emf);
 
         List<Minutedata> minutedatas = minutedataDA.listByScripid(scripid);
@@ -33,7 +35,9 @@ public class MasterDataServices {
                 .range(0, minutedatas.size())
                 .mapToObj(m-> new LastTransactionPrice(m, minutedatas.get(m).getDaylastprice()))
                 .collect(Collectors.toList());
-        return lastTransactrionPriceList;
+        Date callGenerationTimeStamp = minutedatas.getLast().getMinutedataPK().getLastupdateminute();
+        CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(lastTransactrionPriceList, callGenerationTimeStamp);
+        return callResultsInermediate;
     }
 
 }
