@@ -11,9 +11,12 @@ import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.bhaduri.tarangdbservice.DA.MinutedataDA;
+import org.bhaduri.tarangdbservice.DA.ScripsDA;
 import org.bhaduri.tarangdbservice.entities.Minutedata;
+import org.bhaduri.tarangdbservice.entities.Scrips;
 import org.bhaduri.tarangdto.CallResultsIntermediate;
 import org.bhaduri.tarangdto.LastTransactionPrice;
+import org.bhaduri.tarangdto.ScripsDTO;
 
 /**
  *
@@ -39,5 +42,13 @@ public class MasterDataServices {
         CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(lastTransactrionPriceList, callGenerationTimeStamp);
         return callResultsInermediate;
     }
+    
+    public List<ScripsDTO> getScripsList () {
+        ScripsDA scripsDA = new ScripsDA(emf);
+        List<Scrips> scripses = scripsDA.findScripsEntities();
+        List<ScripsDTO> scripsDTOList = scripses.stream().map(s-> new ScripsDTO(s.getScripid())).collect(Collectors.toList());
+        return scripsDTOList;
+    }
+    
 
 }

@@ -21,10 +21,10 @@ public class ScripsDA extends ScripsJpaController{
     public ScripsDA(EntityManagerFactory emf) {
         super(emf);
     }
-    public List<Scrips> listAllScripid() {
-        EntityManager em = getEntityManager();
-        TypedQuery<Scrips> query = em.createNamedQuery("Scrips.listAllScripid", Scrips.class);             
-        List<Scrips> listofscrips = query.getResultList();
-        return listofscrips;
-    }
+//    public List<Scrips> listAllScripid() {
+//        EntityManager em = getEntityManager();
+//        TypedQuery<Scrips> query = em.createNamedQuery("Scrips.listAllScripid", Scrips.class);             
+//        List<Scrips> listofscrips = query.getResultList();
+//        return listofscrips;
+//    }
 }
