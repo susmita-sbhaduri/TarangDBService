@@ -39,7 +39,7 @@ public class MasterDataServices {
                 .mapToObj(m-> new LastTransactionPrice(m, minutedatas.get(m).getDaylastprice()))
                 .collect(Collectors.toList());
         Date callGenerationTimeStamp = minutedatas.getLast().getMinutedataPK().getLastupdateminute();
-        CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(lastTransactrionPriceList, callGenerationTimeStamp);
+        CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(scripid, lastTransactrionPriceList, callGenerationTimeStamp);
         return callResultsInermediate;
     }
     
