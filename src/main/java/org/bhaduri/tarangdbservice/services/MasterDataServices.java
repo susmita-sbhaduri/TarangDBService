@@ -24,7 +24,9 @@ import org.bhaduri.tarangdbservice.entities.Scrips;
 import org.bhaduri.tarangdto.CallResults;
 import org.bhaduri.tarangdto.CallResultsIntermediate;
 import org.bhaduri.tarangdto.LastTransactionPrice;
+import org.bhaduri.tarangdto.LastTransactionVolume;
 import org.bhaduri.tarangdto.ScripsDTO;
+import org.bhaduri.tarangdto.VolumeIntermediate;
 
 /**
  *
@@ -50,6 +52,20 @@ public class MasterDataServices {
         Double callGenerationPrice = minutedatas.getLast().getDaylastprice();
         CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(scripid, lastTransactrionPriceList, callGenerationTimeStamp, callGenerationPrice);
         return callResultsInermediate;
+    }
+    
+    public VolumeIntermediate getLastTransactionVolumeList(String scripid) {
+        MinutedataDA minutedataDA = new MinutedataDA(emf);
+
+        List<Minutedata> minutedatas = minutedataDA.listByScripid(scripid);
+        List<LastTransactionVolume> lastTransactrionVolumeList = IntStream
+                .range(0, minutedatas.size())
+                .mapToObj(m -> new LastTransactionVolume(m, (int)minutedatas.get(m).getTotaltradedvolume()))
+                .collect(Collectors.toList());
+//        Date callGenerationTimeStamp = minutedatas.getLast().getMinutedataPK().getLastupdateminute();
+//        Double callGenerationPrice = minutedatas.getLast().getDaylastprice();
+        VolumeIntermediate volumeIntermediate = new VolumeIntermediate(lastTransactrionVolumeList, 0);
+        return volumeIntermediate;
     }
 
     public List<ScripsDTO> getScripsList() {
