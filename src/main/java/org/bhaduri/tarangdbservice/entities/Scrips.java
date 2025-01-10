@@ -4,7 +4,6 @@
  */
 package org.bhaduri.tarangdbservice.entities;
 
-import java.io.Serializable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,10 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 @Entity
 @Table(name = "scrips")

@@ -19,7 +19,7 @@ import org.bhaduri.tarangdbservice.entities.MinutedataPK;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 public class MinutedataJpaController implements Serializable {
 

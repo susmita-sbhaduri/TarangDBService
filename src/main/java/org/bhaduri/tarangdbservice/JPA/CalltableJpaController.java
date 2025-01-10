@@ -19,7 +19,7 @@ import org.bhaduri.tarangdbservice.entities.CalltablePK;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 public class CalltableJpaController implements Serializable {
 

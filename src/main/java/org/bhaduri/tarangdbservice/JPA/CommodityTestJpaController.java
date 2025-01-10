@@ -19,7 +19,7 @@ import org.bhaduri.tarangdbservice.entities.CommodityTestPK;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 public class CommodityTestJpaController implements Serializable {
 

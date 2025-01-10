@@ -4,8 +4,6 @@
  */
 package org.bhaduri.tarangdbservice.entities;
 
-import java.io.Serializable;
-import java.util.Date;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -13,10 +11,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 @Entity
 @Table(name = "minutedata")

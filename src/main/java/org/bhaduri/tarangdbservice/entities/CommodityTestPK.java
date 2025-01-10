@@ -4,17 +4,17 @@
  */
 package org.bhaduri.tarangdbservice.entities;
 
-import java.io.Serializable;
-import java.util.Date;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 @Embeddable
 public class CommodityTestPK implements Serializable {

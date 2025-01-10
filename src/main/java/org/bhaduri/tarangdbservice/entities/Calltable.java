@@ -4,18 +4,18 @@
  */
 package org.bhaduri.tarangdbservice.entities;
 
-import java.io.Serializable;
-import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 @Entity
 @Table(name = "calltable")
@@ -27,7 +27,8 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Calltable.findByCallone", query = "SELECT c FROM Calltable c WHERE c.callone = :callone"),
     @NamedQuery(name = "Calltable.findByCalltwo", query = "SELECT c FROM Calltable c WHERE c.calltwo = :calltwo"),
     @NamedQuery(name = "Calltable.findByRetraceone", query = "SELECT c FROM Calltable c WHERE c.retraceone = :retraceone"),
-    @NamedQuery(name = "Calltable.findByRetracetwo", query = "SELECT c FROM Calltable c WHERE c.retracetwo = :retracetwo")})
+    @NamedQuery(name = "Calltable.findByRetracetwo", query = "SELECT c FROM Calltable c WHERE c.retracetwo = :retracetwo"),
+    @NamedQuery(name = "Calltable.findByCallthree", query = "SELECT c FROM Calltable c WHERE c.callthree = :callthree")})
 public class Calltable implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,8 @@ public class Calltable implements Serializable {
     private Double retraceone;
     @Column(name = "retracetwo")
     private Double retracetwo;
+    @Column(name = "callthree")
+    private String callthree;
 
     public Calltable() {
     }
@@ -102,6 +105,14 @@ public class Calltable implements Serializable {
 
     public void setRetracetwo(Double retracetwo) {
         this.retracetwo = retracetwo;
+    }
+
+    public String getCallthree() {
+        return callthree;
+    }
+
+    public void setCallthree(String callthree) {
+        this.callthree = callthree;
     }
 
     @Override

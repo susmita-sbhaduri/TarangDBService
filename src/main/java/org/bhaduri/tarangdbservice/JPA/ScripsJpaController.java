@@ -18,7 +18,7 @@ import org.bhaduri.tarangdbservice.entities.Scrips;
 
 /**
  *
- * @author bhaduri
+ * @author sb
  */
 public class ScripsJpaController implements Serializable {
 
