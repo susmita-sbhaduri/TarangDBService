@@ -86,6 +86,9 @@ public class MasterDataServices {
         calltable.getCalltablePK().setLastupdateminute(callResults.getCallGenerationTimeStamp());
         calltable.setCallone(callResults.getCallVersionOne());
         calltable.setCalltwo(callResults.getCallVersionTwo());
+        calltable.setCallthree(callResults.getCallVersionThree());
+        calltable.setRetraceone(callResults.getRetraceVersionOne());
+        calltable.setRetracetwo(callResults.getRetraceVersionTwo());
         calltable.setPrice(callResults.getCallGenerationPrice());
         try {
             calltableDA.create(calltable);
