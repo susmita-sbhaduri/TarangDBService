@@ -57,6 +57,30 @@ public class MinutedataDA extends MinutedataJpaController{
         return listofpricedata;
     }
     
+    public List<Minutedata> buyCallDataForScripPrice(String scripid, Date lastupdateStart, 
+            Date lastupdateEnd, double price) {
+        EntityManager em = getEntityManager();
+        TypedQuery<Minutedata> query = em.createNamedQuery("Minutedata.buyCallDataForScripPrice", Minutedata.class);
+        query.setParameter("scripid", scripid); 
+        query.setParameter("price", price);
+        query.setParameter("lastupdstart", lastupdateStart);
+        query.setParameter("lastupdend", lastupdateEnd);
+        List<Minutedata> listofpricedata = query.getResultList();
+        return listofpricedata;
+    }
+    
+    public List<Minutedata> sellCallDataForScripPrice(String scripid, Date lastupdateStart, 
+            Date lastupdateEnd, double price) {
+        EntityManager em = getEntityManager();
+        TypedQuery<Minutedata> query = em.createNamedQuery("Minutedata.sellCallDataForScripPrice", Minutedata.class);
+        query.setParameter("scripid", scripid); 
+        query.setParameter("price", price);
+        query.setParameter("lastupdstart", lastupdateStart);
+        query.setParameter("lastupdend", lastupdateEnd);
+        List<Minutedata> listofpricedata = query.getResultList();
+        return listofpricedata;
+    }
+    
     public List<Minutedata> dataForDurScript(String scripid, Date lastupdateStart, Date lastupdateEnd) {
         EntityManager em = getEntityManager();
         TypedQuery<Minutedata> query = em.createNamedQuery("Minutedata.dataForDurScript", Minutedata.class);

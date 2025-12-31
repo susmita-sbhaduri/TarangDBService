@@ -9,11 +9,20 @@
     <named-query name="Minutedata.validCallsForScript">
         <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend ORDER BY m.minutedataPK.lastupdateminute DESC</query>
     </named-query>
+    <named-query name="Minutedata.buyCallDataForScripPrice">
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend AND m.daylastprice &gt; :price</query>
+    </named-query>
+    <named-query name="Minutedata.sellCallDataForScripPrice">
+        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend AND m.daylastprice &lt; :price</query>
+    </named-query>
     <named-query name="Calltable.calllistSorted">
         <query>SELECT c FROM Calltable c ORDER BY c.calltablePK.scripid, c.calltablePK.lastupdateminute</query>
     </named-query>
     <named-query name="Calltable.callPerScripid">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.scripid = :scripid</query>
+    </named-query>
+    <named-query name="Calltable.callPerScripTwoMonths">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.scripid = :scripid ORDER BY c.calltablePK.lastupdateminute DESC</query>
     </named-query>
     <named-query name="Calltable.getReverseCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.scripid = :scripid AND c.calltablePK.lastupdateminute &lt; :lastupddate AND c.calltwo = :calltwo ORDER BY c.calltablePK.lastupdateminute DESC</query>

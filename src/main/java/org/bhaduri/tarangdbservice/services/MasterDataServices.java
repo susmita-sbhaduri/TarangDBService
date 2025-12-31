@@ -7,7 +7,6 @@ package org.bhaduri.tarangdbservice.services;
 import java.util.List;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,6 +96,38 @@ public class MasterDataServices {
         } catch (Exception ex) {
             Logger.getLogger(MasterDataServices.class.getName()).log(Level.WARNING, null, ex);
         }
+    }
+    
+    public List<Calltable> getCaldataForTwoMonths(String scripid) {
+        CalltableDA calldataDA = new CalltableDA(emf);
+
+        List<Calltable> calldatas = calldataDA.callPerScripTwoMonths(scripid);
+//        List<LastTransactionPrice> lastTransactrionPriceList = IntStream
+//                .range(0, minutedatas.size())
+//                .mapToObj(m -> new LastTransactionPrice(m, minutedatas.get(m).getDaylastprice()))
+//                .collect(Collectors.toList());
+//        Date callGenerationTimeStamp = minutedatas.getLast().getMinutedataPK().getLastupdateminute();
+//        Double callGenerationPrice = minutedatas.getLast().getDaylastprice();
+//        CallResultsIntermediate callResultsInermediate = new CallResultsIntermediate(scripid, lastTransactrionPriceList, callGenerationTimeStamp, callGenerationPrice);
+        return calldatas;
+    }
+    
+    public List<Minutedata> getValidBuyCallData(String scripid, Date sdate, 
+            Date edate, double price) {
+        MinutedataDA mindataDA = new MinutedataDA(emf);
+        
+        List<Minutedata> validmindata = mindataDA.buyCallDataForScripPrice(scripid,
+               sdate, edate, price);
+        return validmindata;
+    }
+    
+    public List<Minutedata> getValidSellCallData(String scripid, Date sdate, 
+            Date edate, double price) {
+        MinutedataDA mindataDA = new MinutedataDA(emf);
+        
+        List<Minutedata> validmindata = mindataDA.sellCallDataForScripPrice(scripid,
+               sdate, edate, price);
+        return validmindata;
     }
 }
 
