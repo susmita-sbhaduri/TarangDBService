@@ -9,11 +9,11 @@
     <named-query name="Minutedata.validCallsForScript">
         <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend ORDER BY m.minutedataPK.lastupdateminute DESC</query>
     </named-query>
-    <named-query name="Minutedata.buyCallDataForScripPrice">
-        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend AND m.daylastprice &gt; :price</query>
+    <named-query name="Minutedata.buyMaxCallPriceForScrip">
+        <query>SELECT MAX(m.daylastprice) FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend</query>
     </named-query>
-    <named-query name="Minutedata.sellCallDataForScripPrice">
-        <query>SELECT m FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend AND m.daylastprice &lt; :price</query>
+    <named-query name="Minutedata.sellMinCallPriceForScrip">
+        <query>SELECT MIN(m.daylastprice) FROM Minutedata m WHERE m.minutedataPK.scripid =:scripid AND m.minutedataPK.lastupdateminute &gt; :lastupdstart AND m.minutedataPK.lastupdateminute &lt;= :lastupdend</query>
     </named-query>
     <named-query name="Calltable.calllistSorted">
         <query>SELECT c FROM Calltable c ORDER BY c.calltablePK.scripid, c.calltablePK.lastupdateminute</query>

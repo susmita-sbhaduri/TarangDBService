@@ -15,16 +15,20 @@ import java.util.stream.IntStream;
 import org.bhaduri.tarangdbservice.DA.CalltableDA;
 import org.bhaduri.tarangdbservice.DA.MinutedataDA;
 import org.bhaduri.tarangdbservice.DA.ScripsDA;
+import org.bhaduri.tarangdbservice.DA.ValidatecallDA;
 import org.bhaduri.tarangdbservice.JPA.exceptions.PreexistingEntityException;
 import org.bhaduri.tarangdbservice.entities.Calltable;
 import org.bhaduri.tarangdbservice.entities.CalltablePK;
 import org.bhaduri.tarangdbservice.entities.Minutedata;
 import org.bhaduri.tarangdbservice.entities.Scrips;
+import org.bhaduri.tarangdbservice.entities.Validatecall;
+import org.bhaduri.tarangdbservice.entities.ValidatecallPK;
 import org.bhaduri.tarangdto.CallResults;
 import org.bhaduri.tarangdto.CallResultsIntermediate;
 import org.bhaduri.tarangdto.LastTransactionPrice;
 import org.bhaduri.tarangdto.LastTransactionVolume;
 import org.bhaduri.tarangdto.ScripsDTO;
+import org.bhaduri.tarangdto.ValidateCallRec;
 import org.bhaduri.tarangdto.VolumeIntermediate;
 
 /**
@@ -112,22 +116,49 @@ public class MasterDataServices {
         return calldatas;
     }
     
-    public List<Minutedata> getValidBuyCallData(String scripid, Date sdate, 
-            Date edate, double price) {
-        MinutedataDA mindataDA = new MinutedataDA(emf);
-        
-        List<Minutedata> validmindata = mindataDA.buyCallDataForScripPrice(scripid,
-               sdate, edate, price);
-        return validmindata;
+    public Validatecall getOldestValidatecallRec() {
+        ValidatecallDA validatetableDA = new ValidatecallDA(emf);
+
+        List<Calltable> calldatas = calldataDA.callPerScripTwoMonths(scripid);
+        return calldatas;
     }
     
-    public List<Minutedata> getValidSellCallData(String scripid, Date sdate, 
-            Date edate, double price) {
+    public double getBuyMaxMinutePrice(String scripid, Date sdate, Date edate) {
+        MinutedataDA mindataDA = new MinutedataDA(emf);        
+        double maxprice = mindataDA.buyMaxCallPriceForScrip(scripid,sdate, edate);
+        return maxprice;
+    }
+    
+    public double getSelMinMinutePrice(String scripid, Date sdate, Date edate) {
         MinutedataDA mindataDA = new MinutedataDA(emf);
         
-        List<Minutedata> validmindata = mindataDA.sellCallDataForScripPrice(scripid,
-               sdate, edate, price);
-        return validmindata;
+        double minprice = mindataDA.sellMinCallPriceForScrip(scripid,sdate, edate);
+        return minprice;
+    }
+    
+    public void insertValidateCall(ValidateCallRec validaterec) {
+        ValidatecallDA validatetableDA = new ValidatecallDA(emf);
+
+        ValidatecallPK recordpk = new ValidatecallPK();
+        Validatecall record = new Validatecall();
+        recordpk.setScripid(validaterec.getScripId());
+        recordpk.setLastupdateminute(validaterec.getCallGenerationTimeStamp());
+        record.setValidatecallPK(recordpk);
+        
+        record.setPrice(validaterec.getPrice());
+        record.setCallone(validaterec.getCallVersionOne());
+        record.setCalltwo(validaterec.getCallVersionTwo());
+        record.setMarginone(validaterec.getMarginOne());
+        record.setOutcomeone(validaterec.getOutcomeOne());
+        record.setMargintwo(validaterec.getMarginTwo());
+        record.setOutcometwo(validaterec.getOutcomeTwo());
+        try {
+            validatetableDA.create(record);
+        } catch (PreexistingEntityException pe) {
+            System.out.println("Duplicate" + validaterec.getScripId());
+        } catch (Exception ex) {
+            Logger.getLogger(MasterDataServices.class.getName()).log(Level.WARNING, null, ex);
+        }
     }
 }
 

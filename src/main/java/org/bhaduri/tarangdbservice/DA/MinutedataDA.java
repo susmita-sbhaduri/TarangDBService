@@ -57,28 +57,24 @@ public class MinutedataDA extends MinutedataJpaController{
         return listofpricedata;
     }
     
-    public List<Minutedata> buyCallDataForScripPrice(String scripid, Date lastupdateStart, 
-            Date lastupdateEnd, double price) {
+    public double buyMaxCallPriceForScrip(String scripid, Date lastupdateStart, 
+            Date lastupdateEnd) {
         EntityManager em = getEntityManager();
-        TypedQuery<Minutedata> query = em.createNamedQuery("Minutedata.buyCallDataForScripPrice", Minutedata.class);
-        query.setParameter("scripid", scripid); 
-        query.setParameter("price", price);
+        TypedQuery<Double> query = em.createNamedQuery("Minutedata.buyMaxCallPriceForScrip", Double.class);
+        query.setParameter("scripid", scripid);
         query.setParameter("lastupdstart", lastupdateStart);
         query.setParameter("lastupdend", lastupdateEnd);
-        List<Minutedata> listofpricedata = query.getResultList();
-        return listofpricedata;
+        return query.getSingleResult();
     }
     
-    public List<Minutedata> sellCallDataForScripPrice(String scripid, Date lastupdateStart, 
-            Date lastupdateEnd, double price) {
+    public double sellMinCallPriceForScrip(String scripid, Date lastupdateStart, 
+            Date lastupdateEnd) {
         EntityManager em = getEntityManager();
-        TypedQuery<Minutedata> query = em.createNamedQuery("Minutedata.sellCallDataForScripPrice", Minutedata.class);
+        TypedQuery<Double> query = em.createNamedQuery("Minutedata.sellMinCallPriceForScrip", Double.class);
         query.setParameter("scripid", scripid); 
-        query.setParameter("price", price);
         query.setParameter("lastupdstart", lastupdateStart);
         query.setParameter("lastupdend", lastupdateEnd);
-        List<Minutedata> listofpricedata = query.getResultList();
-        return listofpricedata;
+        return query.getSingleResult();
     }
     
     public List<Minutedata> dataForDurScript(String scripid, Date lastupdateStart, Date lastupdateEnd) {
