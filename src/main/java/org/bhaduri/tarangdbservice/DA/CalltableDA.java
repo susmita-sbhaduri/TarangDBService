@@ -37,11 +37,11 @@ public class CalltableDA extends CalltableJpaController{
         return listofscripdata;
     }
     
-    public List<Calltable> callPerScripTwoMonths(String scripid) {
+    public List<Calltable> callPerScripForDuration(String scripid, int duration) {
         EntityManager em = getEntityManager();
-        TypedQuery<Calltable> query = em.createNamedQuery("Calltable.callPerScripTwoMonths", Calltable.class);
+        TypedQuery<Calltable> query = em.createNamedQuery("Calltable.callPerScripForDuration", Calltable.class);
         query.setParameter("scripid", scripid);
-        query.setMaxResults(61);  
+        query.setMaxResults(duration);  
         List<Calltable> listofscripdata = query.getResultList();
         return listofscripdata;
     }

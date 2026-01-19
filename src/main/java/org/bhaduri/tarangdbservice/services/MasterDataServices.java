@@ -16,6 +16,7 @@ import org.bhaduri.tarangdbservice.DA.CalltableDA;
 import org.bhaduri.tarangdbservice.DA.MinutedataDA;
 import org.bhaduri.tarangdbservice.DA.ScripsDA;
 import org.bhaduri.tarangdbservice.DA.ValidatecallDA;
+import org.bhaduri.tarangdbservice.JPA.exceptions.NonexistentEntityException;
 import org.bhaduri.tarangdbservice.JPA.exceptions.PreexistingEntityException;
 import org.bhaduri.tarangdbservice.entities.Calltable;
 import org.bhaduri.tarangdbservice.entities.CalltablePK;
@@ -102,10 +103,10 @@ public class MasterDataServices {
         }
     }
     
-    public List<Calltable> getCaldataForTwoMonths(String scripid) {
+    public List<Calltable> getValidateCallsForDuration(String scripid, int duration) {
         CalltableDA calldataDA = new CalltableDA(emf);
 
-        List<Calltable> calldatas = calldataDA.callPerScripTwoMonths(scripid);
+        List<Calltable> calldatas = calldataDA.callPerScripForDuration(scripid, duration);
 //        List<LastTransactionPrice> lastTransactrionPriceList = IntStream
 //                .range(0, minutedatas.size())
 //                .mapToObj(m -> new LastTransactionPrice(m, minutedatas.get(m).getDaylastprice()))
@@ -118,9 +119,19 @@ public class MasterDataServices {
     
     public Validatecall getOldestValidatecallRec() {
         ValidatecallDA validatetableDA = new ValidatecallDA(emf);
-
-        List<Calltable> calldatas = calldataDA.callPerScripTwoMonths(scripid);
-        return calldatas;
+        Validatecall oldestRec = validatetableDA.oldestRecord();
+        return oldestRec;
+    }
+    
+    public int deleteOldestValidatecallRec(Validatecall validaterec) {
+        ValidatecallDA validatetableDA = new ValidatecallDA(emf);
+        try {
+            return validatetableDA.delOldestRecAcrossScrip(validaterec
+                    .getValidatecallPK().getLastupdateminute());
+        } catch (Exception exception) {
+            System.out.println(exception + " has occurred in deleteOldestValidatecallRec.");
+            return 204;
+        }
     }
     
     public double getBuyMaxMinutePrice(String scripid, Date sdate, Date edate) {
