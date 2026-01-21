@@ -31,10 +31,6 @@
         <query>SELECT s FROM Scrips s</query>
     </named-query>
     <named-query name="Validatecall.getOldestRecAcrossScrip">
-        <query>SELECT v FROM Validatecall v ORDER BY v.validatecallPK.lastupdateminute</query>
-    </named-query>
-    <named-query name="Validatecall.delOldestRecAcrossScrip">
-        <query>DELETE FROM Validatecall v WHERE v.validatecallPK.lastupdateminute = :timestamp</query>
-    </named-query>
-    
+        <query>SELECT v FROM Validatecall v WHERE v.validatecallPK.scripid =:scripid ORDER BY v.validatecallPK.lastupdateminute</query>
+    </named-query>    
 </entity-mappings>

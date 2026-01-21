@@ -117,17 +117,21 @@ public class MasterDataServices {
         return calldatas;
     }
     
-    public Validatecall getOldestValidatecallRec() {
+    public Validatecall getOldestValidatecallRec(String scripid) {
         ValidatecallDA validatetableDA = new ValidatecallDA(emf);
-        Validatecall oldestRec = validatetableDA.oldestRecord();
+        Validatecall oldestRec = validatetableDA.oldestRecord(scripid);
         return oldestRec;
     }
     
-    public int deleteOldestValidatecallRec(Validatecall validaterec) {
+    public int deleteOldestValidatecallRec(String scripid, Date timestamp) {
         ValidatecallDA validatetableDA = new ValidatecallDA(emf);
-        try {
-            return validatetableDA.delOldestRecAcrossScrip(validaterec
-                    .getValidatecallPK().getLastupdateminute());
+        try {            
+            ValidatecallPK recordpk = new ValidatecallPK();
+            recordpk.setScripid(scripid);
+            recordpk.setLastupdateminute(timestamp);
+            validatetableDA.destroy(recordpk);
+            return 0;
+            
         } catch (Exception exception) {
             System.out.println(exception + " has occurred in deleteOldestValidatecallRec.");
             return 204;
