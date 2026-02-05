@@ -9,7 +9,8 @@
     <class>org.bhaduri.tarangdbservice.entities.Commodity</class>
     <class>org.bhaduri.tarangdbservice.entities.Validatecall</class>
     <properties>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tarangdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="jakarta.persistence.jdbc.url" 
+          value="jdbc:mysql://localhost:3306/tarangdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;serverTimezone=Asia/Kolkata&amp;allowPublicKeyRetrieval=true"/>
       <property name="jakarta.persistence.jdbc.user" value="bhadurianirban"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.password" value="Jhom2brishti"/>
